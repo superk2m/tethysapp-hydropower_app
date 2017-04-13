@@ -1,0 +1,49 @@
+{% extends "hydropower_app/base.html" %}
+
+{% load tethys_gizmos %}
+
+{% load staticfiles %}
+
+{% block styles %}
+{{ block.super }}
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+    <style>
+      #mapDiv {
+        height: 600px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+    </style>
+{% endblock %}
+
+{% block app_navigation_items %}
+
+  <p>Step1: Click on the map to select an outlet on a river (within the red border)</p>
+  <p>Step2: Click on this button to delineate watershed and calculate the watershed volume</p>
+  <button onclick="app.run_service()">Run</button>
+
+  <div id="statusDiv">
+    <p id="volstatus"></p>
+  </div>
+
+  <div class="button">
+      <input type="button" id="volume" value="Volume Result" />
+  </div>
+  <div class="text"></div>
+
+
+{% endblock %}
+
+{% block app_content %}
+
+<div id="mapDiv"></div>
+
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="https://js.arcgis.com/3.20/init.js"></script>
+  <script src="{% static 'hydropower_app/js/main.js' %}"></script>
+{% endblock %}
+
